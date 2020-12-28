@@ -3,16 +3,16 @@
 		<label>
 			Выберите шаблон:
 			<select class="select large" v-model="blocksType" v-on:change="addClass">
-				<option selected value="Large">Большой</option>
-				<option value="Carousel">Карусель</option>
-				<option value="Graphical_4">Графический 4</option>
-				<option value="Horizontal_1">Горизонтальный 1</option>
-				<option value="Horizontal_4">Горизонтальный 4</option>
-				<option value="Horizontal_5">Горизонтальный 5</option>
-				<option value="Horizontal_6">Горизонтальный 6</option>
-				<option value="Social">Социальный</option>
-				<option value="Smart_1">Smart 1</option>
-				<option value="With_date">Объявление с датой публикации</option>
+				<option selected value="large">Большой</option>
+				<option value="carousel">Карусель</option>
+				<option value="graphical_4">Графический 4</option>
+				<option value="horizontal_1">Горизонтальный 1</option>
+				<option value="horizontal_4">Горизонтальный 4</option>
+				<option value="horizontal_5">Горизонтальный 5</option>
+				<option value="horizontal_6">Горизонтальный 6</option>
+				<option value="social">Социальный</option>
+				<option value="smart_1">Smart 1</option>
+				<option value="with_date">Объявление с датой публикации</option>
 			</select>
 			{{ blocksType }}
 		</label>
@@ -240,54 +240,16 @@ import With_date from '@/components/With_date'
 export default {
 	data () {
 		return {
-			blocksType: 'Large'
+			blocksType: 'large'
 		}
 	},
 	methods: {
 		addClass() {
-			let select = document.querySelector('.select');
-			let box = document.querySelector('.box')
+			let select = document.querySelector('.select'),
+				box = document.querySelector('.box');
 
-			if (this.blocksType === 'Large') {
-				select.className = 'select large';
-				box.className = 'box large';
-
-			} else if (this.blocksType === 'Carousel') {
-				select.className = 'select carousel';
-				box.className = 'box carousel';
-
-			} else if (this.blocksType === 'Graphical_4') {
-				select.className = 'select graphical_4';
-				box.className = 'box graphical_4';
-
-			} else if (this.blocksType === 'Horizontal_1') {
-				select.className = 'select horizontal_1';
-				box.className = 'box horizontal_1';
-
-			} else if (this.blocksType === 'Horizontal_4') {
-				select.className = 'select horizontal_4';
-				box.className = 'box horizontal_4';
-
-			} else if (this.blocksType === 'Horizontal_5') {
-				select.className = 'select horizontal_5';
-				box.className = 'box horizontal_5';
-
-			} else if (this.blocksType === 'Horizontal_6') {
-				select.className = 'select horizontal_6';
-				box.className = 'box horizontal_6';
-
-			} else if (this.blocksType === 'Social') {
-				select.className = 'select social';
-				box.className = 'box social';
-
-			} else if (this.blocksType === 'Smart_1') {
-				select.className = 'select smart_1';
-				box.className = 'box smart_1';
-
-			} else if (this.blocksType === 'With_date') {
-				select.className = 'select with_date';
-				box.className = 'box with_date';
-			}
+			select.className = `select ${this.blocksType}`;
+			box.className = `box ${this.blocksType}`;
 		}
 	},
 	components: {
