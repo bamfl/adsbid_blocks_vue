@@ -1,26 +1,34 @@
 <template>
 	<div>
-		<label>
-			Выберите шаблон:
-			<select class="select large" v-model="blocksType" v-on:change="addClass">
-				<option selected value="large">Большой</option>
-				<option value="carousel">Карусель</option>
-				<option value="graphical_4">Графический 4</option>
-				<option value="horizontal_1">Горизонтальный 1</option>
-				<option value="horizontal_4">Горизонтальный 4</option>
-				<option value="horizontal_5">Горизонтальный 5</option>
-				<option value="horizontal_6">Горизонтальный 6</option>
-				<option value="social">Социальный</option>
-				<option value="smart_1">Smart 1</option>
-				<option value="with_date">Объявление с датой публикации</option>
-			</select>
-			{{ blocksType }}
-		</label>
+		<div class="template">
+			<label>
+				<span>Выберите шаблон:</span>
+				<select class="select large" v-model="blocksType" v-on:change="addClass">
+					<option value="large" selected>Большой</option>
+					<option value="carousel">Карусель</option>
+					<option value="graphical_4">Графический 4</option>
+					<option value="horizontal_1">Горизонтальный 1</option>
+					<option value="horizontal_4">Горизонтальный 4</option>
+					<option value="horizontal_5">Горизонтальный 5</option>
+					<option value="horizontal_6">Горизонтальный 6</option>
+					<option value="social">Социальный</option>
+					<option value="smart_1">Smart 1</option>
+					<option value="with_date">Объявление с датой публикации</option>
+				</select>
+			</label>
+			<label><span>Количество элементов (по горизонтали):</span><input type="range" min="1" max="3" v-model="columnsValue">{{columnsValue}}</label>
+			<label><span>Количество строк (по вертикали):</span><input type="range" min="1" max="3" v-model="rowsValue">{{rowsValue}}</label>
+		</div>
 		<div class="box large">
 			<div class='container'>
 				<div class="box__row">
 					<div class="arrow prev"></div>
-					<div class="box__column">
+					<Column 
+						v-for="column of Columns" :key="column.id"
+						v-bind:column="column"
+						v-bind:columnsValue="+columnsValue"
+					/>
+					<!-- <div class="box__column">
 						<a href="#" class="box__item item-box item-box_1">
 							<div class="item-box__image">
 								<div class="item-box__top">
@@ -217,7 +225,7 @@
 							</div>
 							<div class="item-box__shadow"></div>
 						</a>
-					</div>
+					</div> -->
 					<div class="arrow next"></div>
 				</div>
 			</div>
@@ -226,6 +234,8 @@
 </template>
 
 <script>
+import Column from '@/components/Column'
+
 import Large from '@/components/Large'
 import Carousel from '@/components/Carousel'
 import Graphical_4 from '@/components/Graphical_4'
@@ -240,7 +250,9 @@ import With_date from '@/components/With_date'
 export default {
 	data () {
 		return {
-			blocksType: 'large'
+			blocksType: 'large',
+			columnsValue: 3,
+			rowsValue: 1
 		}
 	},
 	methods: {
@@ -253,21 +265,23 @@ export default {
 		}
 	},
 	components: {
-		Large,
-		Carousel,
-		Graphical_4,
-		Horizontal_1,
-		Horizontal_4,
-		Horizontal_5,
-		Horizontal_6,
-		Social,
-		Smart_1,
-		With_date
+		Column
+	},
+	computed: {
+		Columns() {
+			let result = [];
+
+			for (let i = 0; i < this.columnsValue * this.rowsValue; i++) {
+				result.push({id: i+1, title: 'Большой живот не от еды! Он уйдёт за 5-10 дней, натощак пейте обычный крепкий... '})
+			}
+
+			return result
+		}
 	}
 }
 </script>
 
-<style>
+<style lang="scss">
 *,
 *:before,
 *:after {
@@ -361,15 +375,20 @@ margin: 0;
 padding: 0;
 }
 
-label {
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: 10;
+.template {
 	background-color: #fff;
 	padding: 5px;
 }
 .select {
 	border: 1px solid #000;
+}
+label {
+	margin: 0px 0px 10px 0px;
+	display: flex;
+	align-items: center;
+
+	span, input {
+		margin: 0px 10px 0px 0px;
+	}
 }
 </style>

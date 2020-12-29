@@ -18,7 +18,7 @@ export default {
 .large {
 	.container {
 	  padding: 30px 10px;
-	  max-width: 512px !important;
+	  max-width: 1512.02px !important;
 	}
 	
 	.arrow {
@@ -32,18 +32,15 @@ export default {
 	  -ms-flex-wrap: wrap;
 	      flex-wrap: wrap;
 	  margin: 0 -4px;
+	  justify-content: center;
 	}
 	
 	.box__column {
 	  -webkit-box-flex: 1;
-	      -ms-flex: 1 1 100%;
-	          flex: 1 1 100%;
+	      -ms-flex: 0 1 33.333%;
+	          flex: 0 1 33.333%;
 	  padding: 4px;
-	  min-width: 300px;
-	}
-	
-	.box__column:not(:nth-child(2)) {
-	  display: none;
+	  max-width: 33.333%;
 	}
 	
 	.item-box {
