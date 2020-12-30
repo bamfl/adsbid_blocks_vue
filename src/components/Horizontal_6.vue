@@ -23,6 +23,7 @@ export default {
 	.container {
 		margin: 30px 0px 0px 0px !important;
 		max-width: 100% !important;
+	    padding: 0 10px;
 	}
 	
 	.box__row {
@@ -48,11 +49,6 @@ export default {
 	        -ms-flex: 1 1 100%;
 	            flex: 1 1 100%;
 	  }
-	}
-	
-	.container {
-	  max-width: 100%;
-	  padding: 0 10px;
 	}
 	
 	.arrow {

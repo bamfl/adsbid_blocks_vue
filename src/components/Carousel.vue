@@ -17,9 +17,11 @@ export default {
 
 .carousel {
 	.container {
-	padding: 30px 10px;
-	position: relative;
-	overflow: hidden;
+		padding: 30px 10px;
+		position: relative;
+		overflow: hidden;
+		max-width: 1080px !important;
+		margin: 0 auto;
 	}
 
 	.arrow {
@@ -41,15 +43,16 @@ export default {
 	  box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1);
 	  cursor: pointer;
 	}
-	
-	.arrow.prev {
-	  left: -50px;
+
+		
+	.arrow.prev {  left: -50px;
 	}
 	
 	.arrow.prev::before {
 	  content: '';
 	  position: relative;
 	  top: 50%;
+	  left: 15px;
 	  width: 12px;
 	  height: 18px;
 	  border-style: solid;
@@ -68,6 +71,7 @@ export default {
 	  width: 12px;
 	  height: 18px;
 	  top: 50%;
+	  left: 15px;
 	  border-style: solid;
 	  border-width: 9px 0 9px 12px;
 	  border-color: transparent transparent transparent #000;
@@ -135,6 +139,8 @@ export default {
 	  border-radius: 4px;
 	  overflow: hidden;
 	  min-width: 192px;
+	  max-width: 192px;
+	  margin: 0 auto;
 	}
 	
 	.item-box__image {

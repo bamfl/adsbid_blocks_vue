@@ -17,7 +17,8 @@ export default {
 .social {
 	.container {
 	  padding: 30px 10px;
-	  max-width: 1536.05px !important;
+	  max-width: 1512.02px;
+	  margin: 0 auto;
 	}
 	
 	.arrow {
@@ -30,18 +31,17 @@ export default {
 	  display: flex;
 	  -ms-flex-wrap: wrap;
 	      flex-wrap: wrap;
-	  margin: 0 -10px;
+	  margin: 0 -4px;
 	}
 	
 	.box__column {
 	  -webkit-box-flex: 0;
 	      -ms-flex: 0 1 33.333%;
 	          flex: 0 1 33.333%;
-	  padding: 0px 10px;
+	  padding: 0px 4px;
 	  display: -webkit-box;
 	  display: -ms-flexbox;
 	  display: flex;
-	  margin: 0px 0px 25px 0px;
 	}
 	
 	@media (max-width: 750px) {
@@ -60,6 +60,8 @@ export default {
 	  -webkit-box-direction: normal;
 	      -ms-flex-direction: column;
 	          flex-direction: column;
+	  max-width: 492px;
+	  margin: 0 auto;
 	}
 	
 	@media (max-width: 750px) {
@@ -70,7 +72,7 @@ export default {
 	
 	.item-box__image {
 	  position: relative;
-	  padding: 0px 0px 66.87% 0px;
+	  padding: 0px 0px 66.668% 0px;
 	}
 	
 	.item-box__image img {

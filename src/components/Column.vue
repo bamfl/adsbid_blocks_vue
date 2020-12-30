@@ -1,5 +1,5 @@
 <template>
- 	<div class="box__column" v-bind:style="{flex: `1 1 ${flexBasis}%`}">
+ 	<div class="box__column" v-bind:style="{flex: `${flexProps}`}">
 		<a href="#" class="box__item item-box item-box_1">
 			<div class="item-box__image">
 				<div class="item-box__top">
@@ -41,17 +41,14 @@ export default {
 		columnsValue: Number
 	},
 	computed: {
-		flexBasis() {
+		flexProps() {
 			let flexBasis = (100 / this.columnsValue);
 
-			return flexBasis;
-
-			// if (this.columnsValue == 1) {
-			// 	return `flex: 1 1 ${flexBasis}%`;
-			// } else {
-			// 	return `flex: 0 1 ${flexBasis}%`;
-			// }
-
+			if (this.columnsValue == 1) {
+				return `1 1 ${flexBasis}%`;
+			} else {
+				return `0 1 ${flexBasis}%`;
+			}
 		}
 	}
 }

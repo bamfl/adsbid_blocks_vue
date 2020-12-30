@@ -20,7 +20,7 @@
 			<label><span>Количество строк (по вертикали):</span><input type="range" min="1" max="3" v-model="rowsValue">{{rowsValue}}</label>
 		</div>
 		<div class="box large">
-			<div class='container'>
+			<div class='container' v-bind:style="{'max-width': `${containerSize}`}">
 				<div class="box__row">
 					<div class="arrow prev"></div>
 					<Column 
@@ -276,6 +276,21 @@ export default {
 			}
 
 			return result
+		},
+		containerSize() {
+			if (this.columnsValue == 1 && this.blocksType == `smart_1`) {
+				return `320.02px`
+			} else if (this.columnsValue == 2 && this.blocksType == `smart_1`) {
+				return `630.02px`
+			} else if (this.columnsValue == 3 && this.blocksType == `smart_1`) {
+				return `940.02px`
+			} else if (this.columnsValue == 1) {
+				return `512.02px`
+			} else if (this.columnsValue == 2) {
+				return `1012.02px`
+			} else if (this.columnsValue == 3) {
+				return `1512.02px`
+			}
 		}
 	}
 }

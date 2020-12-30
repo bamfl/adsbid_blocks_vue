@@ -18,7 +18,8 @@ export default {
 .smart_1 {
 	.container {
 	  padding: 30px 10px;
-	  max-width: 936.02px !important;
+	//   max-width: 936.02px !important;
+	  margin: 0 auto;
 	}
 	
 	.arrow {
@@ -94,6 +95,8 @@ export default {
 	  border-radius: 4px;
 	  overflow: hidden;
 	  min-height: 100%;
+	  max-width: 300px;
+	  margin: 0 auto;
 	}
 	
 	.item-box__image {

@@ -18,6 +18,8 @@ export default {
 .horizontal_1 {
 	.container {
 	padding: 30px 10px;
+	max-width: 1080px !important;
+	margin: 0 auto;
 	}
 
 	.arrow {

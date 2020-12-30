@@ -18,7 +18,8 @@ export default {
 .horizontal_5 {
 	.container {
 	padding: 30px 10px;
-	max-width: 1542.02px !important;
+	max-width: 1512.02px;
+	margin: 0 auto;
 	}
 
 	.arrow {
@@ -31,18 +32,17 @@ export default {
 	display: flex;
 	-ms-flex-wrap: wrap;
 		flex-wrap: wrap;
-	margin: 0 -10px;
+	margin: 0 -4px;
 	}
 
 	.box__column {
 	-webkit-box-flex: 0;
 		-ms-flex: 0 1 33.333%;
 			flex: 0 1 33.333%;
-	padding: 0px 10px;
+	padding: 4px;
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
-	margin: 0px 0px 25px 0px;
 	}
 
 	@media (max-width: 600px) {
@@ -62,7 +62,8 @@ export default {
 		-ms-flex-direction: column;
 			flex-direction: column;
 	overflow: hidden;
-	border: 1px solid #dddcda;
+	max-width: 492px;
+	margin: 0 auto;
 	}
 
 	.item-box__image {
@@ -94,6 +95,8 @@ export default {
 		-ms-flex-direction: column;
 			flex-direction: column;
 	color: #202125;
+	border: 1px solid #dddcda;
+	border-top: none;
 	}
 
 	.item-box__descr {

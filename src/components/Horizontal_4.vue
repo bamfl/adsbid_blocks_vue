@@ -18,6 +18,7 @@ export default {
 	.container {
 	padding: 30px 10px;
 	margin: 10px auto;
+	max-width: 1080px !important;
 	}
 
 	.arrow {

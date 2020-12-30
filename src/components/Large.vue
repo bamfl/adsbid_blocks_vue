@@ -17,8 +17,9 @@ export default {
 
 .large {
 	.container {
-	  padding: 30px 10px;
-	  max-width: 1512.02px !important;
+		padding: 30px 10px;
+		// max-width: 1512.02px;
+		margin: 0 auto;
 	}
 	
 	.arrow {
@@ -40,7 +41,6 @@ export default {
 	      -ms-flex: 0 1 33.333%;
 	          flex: 0 1 33.333%;
 	  padding: 4px;
-	  max-width: 33.333%;
 	}
 	
 	.item-box {
@@ -53,6 +53,8 @@ export default {
 	          flex-direction: column;
 	  position: relative;
 	  overflow: hidden;
+	  max-width: 492px;
+	  margin: 0 auto;
 	}
 	
 	.item-box__image {

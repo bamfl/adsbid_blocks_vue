@@ -18,7 +18,8 @@ export default {
 .graphical_4 {
 	.container {
 	  padding: 30px 10px;
-	  max-width: 1512.05px !important;
+	//   max-width: 1512.02px;
+	  margin: 0 auto;
 	}
 	
 	.arrow {
@@ -60,6 +61,8 @@ export default {
 	  position: relative;
 	  border-radius: 4px;
 	  overflow: hidden;
+	  max-width: 492px;
+	  margin: 0 auto;
 	}
 	
 	.item-box__image {

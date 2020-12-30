@@ -17,7 +17,8 @@ export default {
 .with_date {
 	.container {
 	  padding: 30px 10px;
-	  max-width: 1536.02px !important;
+	  max-width: 1536.02px;
+	  margin: 0 auto;
 	}
 	
 	.arrow {
@@ -34,9 +35,6 @@ export default {
 	}
 	
 	.box__column {
-	  -webkit-box-flex: 0;
-	      -ms-flex: 0 1 33.333%;
-	          flex: 0 1 33.333%;
 	  padding: 0px 10px;
 	  display: -webkit-box;
 	  display: -ms-flexbox;
@@ -53,6 +51,8 @@ export default {
 	}
 	
 	.item-box {
+	  margin: 0 auto;
+	  max-width: 492px;
 	  display: -webkit-box;
 	  display: -ms-flexbox;
 	  display: flex;
