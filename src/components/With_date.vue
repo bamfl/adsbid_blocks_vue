@@ -31,11 +31,11 @@ export default {
 	  display: flex;
 	  -ms-flex-wrap: wrap;
 	      flex-wrap: wrap;
-	  margin: 0 -10px;
+	  margin: 0 -4px;
 	}
 	
 	.box__column {
-	  padding: 0px 10px;
+	  padding: 0px 4px;
 	  display: -webkit-box;
 	  display: -ms-flexbox;
 	  display: flex;

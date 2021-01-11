@@ -1,231 +1,81 @@
 <template>
 	<div>
-		<div class="template">
-			<label>
-				<span>Выберите шаблон:</span>
-				<select class="select large" v-model="blocksType" v-on:change="addClass">
-					<option value="large" selected>Большой</option>
-					<option value="carousel">Карусель</option>
-					<option value="graphical_4">Графический 4</option>
-					<option value="horizontal_1">Горизонтальный 1</option>
-					<option value="horizontal_4">Горизонтальный 4</option>
-					<option value="horizontal_5">Горизонтальный 5</option>
-					<option value="horizontal_6">Горизонтальный 6</option>
-					<option value="social">Социальный</option>
-					<option value="smart_1">Smart 1</option>
-					<option value="with_date">Объявление с датой публикации</option>
-				</select>
-			</label>
-			<label><span>Количество элементов (по горизонтали):</span><input type="range" min="1" max="3" v-model="columnsValue">{{columnsValue}}</label>
-			<label><span>Количество строк (по вертикали):</span><input type="range" min="1" max="3" v-model="rowsValue">{{rowsValue}}</label>
+		<div class="options">
+			<div class="template">
+				<label>
+					<span>Выберите шаблон:</span>
+					<select :class="['select', blocksType]" v-model="blocksType" @change="typeChange">
+						<option value="large" selected>Большой</option>
+						<option value="carousel">Карусель</option>
+						<option value="graphical_4">Графический 4</option>
+						<option value="horizontal_1">Горизонтальный 1</option>
+						<option value="horizontal_4">Горизонтальный 4</option>
+						<option value="horizontal_5">Горизонтальный 5</option>
+						<option value="horizontal_6">Горизонтальный 6</option>
+						<option value="social">Социальный</option>
+						<option value="smart_1">Smart 1</option>
+						<option value="with_date">Объявление с датой публикации</option>
+					</select>
+				</label>
+			</div>
+			<div class="cols">
+				<label>
+					<span>Количество элементов (по горизонтали):</span>
+					<input type="range" min="1" max="3" v-model="columnsValue">
+					<div v-if="blocksType !== 'carousel'">{{columnsValue}}</div>
+					<div v-else>{{ columnsValue * rowsValue}}</div>
+				</label>
+			</div>
+			<div class="rows">
+				<label :style="{display: blocksType === 'carousel' ? 'none' : ''}">
+					<span>Количество строк (по вертикали):</span>
+					<input type="range" min="1" max="3" v-model="rowsValue">{{rowsValue}}
+				</label>
+			</div>
+			<div class="border">
+				<label class="border__width">Толщина рамки<input type="text" v-model="border.width"></label>
+				<label class="border__color">Цвет рамки<input type="color" v-model="border.color"></label>
+				<label class="border__type">Тип рамки
+					<select v-model="border.type">
+						<option selected value="solid">Сплошная</option>
+						<option value="dotted">Пунктирная</option>
+						<option value="dashed">Штриховая</option>
+						<option value="double">Двойная</option>
+						<option value="groove">Вдавленная</option>
+						<option value="ridge">Рельефная</option>
+						<option value="inset">Внутрь</option>
+						<option value="outset">Наружу</option>
+					</select>
+				</label>
+			</div>
+			<div class="text">
+				<label>Отступы от текста: сверху<input type="number" v-model="text['padding-top']"></label>
+				<label>справа<input type="number" v-model="text['padding-right']"></label>
+				<label>снизу<input type="number" v-model="text['padding-bottom']"></label>
+				<label>слева<input type="number" v-model="text['padding-left']"></label>
+				<label>Цвет текста<input type="color" v-model="text.color"></label>
+				<label>Размер шрифта текста<input type="number" v-model="text.size"></label>
+			</div>
+			<div class="image">
+				<label>Отступы от картинки: сверху<input type="number" v-model="image['padding-top']"></label>
+				<label>справа<input type="number" v-model="image['padding-right']"></label>
+				<label>снизу<input type="number" v-model="image['padding-bottom']"></label>
+				<label>слева<input type="number" v-model="image['padding-left']"></label>
+			</div>
 		</div>
-		<div class="box large">
-			<div class='container' v-bind:style="{'max-width': `${containerSize}`}">
+
+		<div :class="['box', blocksType]">
+			<div class='container' :style="{'max-width': `${containerSize}`}">
 				<div class="box__row">
 					<div class="arrow prev"></div>
-					<Column 
-						v-for="column of Columns" :key="column.id"
-						v-bind:column="column"
-						v-bind:columnsValue="+columnsValue"
+					<Column
+						v-for="column of columns" :key="column.id"
+						:column="column"
+						:columnsValue="+columnsValue"
+						:border="border"
+						:text="text"
+						:image="image"
 					/>
-					<!-- <div class="box__column">
-						<a href="#" class="box__item item-box item-box_1">
-							<div class="item-box__image">
-								<div class="item-box__top">
-									<div class="item-box__icon">
-										<img src="@/assets/images/heart.png" alt="">
-									</div>
-									<div class="item-box__name">
-										<div class="item-box__title">Медицина 24/7</div>
-										<div class="item-box__subtitle">2 ч. назад</div>
-									</div>
-								</div>
-								<img src="@/assets/images/01.jpg" alt="">
-							</div>
-							<div class="item-box__text">
-								<div class="item-box__descr">
-									Большой живот не от еды! Он уйдёт за 5-10 дней, натощак пейте обычный крепкий...
-									<span class="item-box__else">Ещё</span>
-								</div>
-								<div class="item-box__socials">
-									<div class="item-box__social item-box__likes">205</div>
-									<div class="item-box__social item-box__comments">33</div>
-									<div class="item-box__social item-box__refs">117</div>
-								</div>
-								<div class="item-box__bottom">
-									<div class="item-box__date"><span>3</span> ч. назад</div>
-									<div class="item-box__menu"></div>
-								</div>
-								<div class="item-box__btn">Читать далее</div>
-							</div>
-							<div class="item-box__shadow"></div>
-						</a>
-					</div>
-					<div class="box__column">
-						<a href="#" class="box__item item-box item-box_2">
-							<div class="item-box__image">
-								<div class="item-box__top">
-									<div class="item-box__icon">
-										<img src="@/assets/images/heart.png" alt="">
-									</div>
-									<div class="item-box__name">
-										<div class="item-box__title">Медицина 24/7</div>
-										<div class="item-box__subtitle">2 ч. назад</div>
-									</div>
-								</div>
-								<img src="@/assets/images/02.jpg" alt="">
-							</div>
-							<div class="item-box__text">
-								<div class="item-box__descr">
-									Врачи притихли.. Эта штука восстанавливает суставы в любом возрасте! Пишите рецепт, пока не удалили
-									<span class="item-box__else">Ещё</span>
-								</div>
-								<div class="item-box__socials">
-									<div class="item-box__social item-box__likes">412</div>
-									<div class="item-box__social item-box__comments">118</div>
-									<div class="item-box__social item-box__refs">358</div>
-								</div>
-								<div class="item-box__bottom">
-									<div class="item-box__date"><span>12</span> ч. назад</div>
-									<div class="item-box__menu"></div>
-								</div>
-								<div class="item-box__btn">Читать далее</div>
-							</div>
-							<div class="item-box__shadow"></div>
-						</a>
-					</div>
-					<div class="box__column">
-						<a href="#" class="box__item item-box item-box_3">
-							<div class="item-box__image">
-								<div class="item-box__top">
-									<div class="item-box__icon">
-										<img src="@/assets/images/heart.png" alt="">
-									</div>
-									<div class="item-box__name">
-										<div class="item-box__title">Медицина 24/7</div>
-										<div class="item-box__subtitle">2 ч. назад</div>
-									</div>
-								</div>
-								<img src="@/assets/images/03.jpg" alt="">
-							</div>
-							<div class="item-box__text">
-								<div class="item-box__descr">
-									Студент из г. Краснодар выяснил, как можно вернуть зрение в любом возрасте! Перед сном капайте...                    
-									<span class="item-box__else">Ещё</span>
-								</div>
-								<div class="item-box__socials">
-									<div class="item-box__social item-box__likes">153</div>
-									<div class="item-box__social item-box__comments">188</div>
-									<div class="item-box__social item-box__refs">98</div>
-								</div>
-								<div class="item-box__bottom">
-									<div class="item-box__date"><span>6</span> ч. назад</div>
-									<div class="item-box__menu"></div>
-								</div>
-								<div class="item-box__btn">Читать далее</div>
-							</div>
-							<div class="item-box__shadow"></div>
-						</a>
-					</div>
-					<div class="box__column">
-						<a href="#" class="box__item item-box item-box_4">
-							<div class="item-box__image">
-								<div class="item-box__top">
-									<div class="item-box__icon">
-										<img src="@/assets/images/heart.png" alt="">
-									</div>
-									<div class="item-box__name">
-										<div class="item-box__title">Медицина 24/7</div>
-										<div class="item-box__subtitle">2 ч. назад</div>
-									</div>
-								</div>
-								<img src="@/assets/images/04.jpg" alt="">
-							</div>
-							<div class="item-box__text">
-								<div class="item-box__descr">
-									Уколы не лечат суставы! Суставы излечатся сами за 7 дней, если мазать их обычным 3%-м...
-									<span class="item-box__else">Ещё</span>
-								</div>
-								<div class="item-box__socials">
-									<div class="item-box__social item-box__likes">206</div>
-									<div class="item-box__social item-box__comments">198</div>
-									<div class="item-box__social item-box__refs">109</div>
-								</div>
-								<div class="item-box__bottom">
-									<div class="item-box__date"><span>6</span> ч. назад</div>
-									<div class="item-box__menu"></div>
-								</div>
-								<div class="item-box__btn">Читать далее</div>
-							</div>
-							<div class="item-box__shadow"></div>
-						</a>
-					</div>
-					<div class="box__column mid">
-						<a href="#" class="box__item item-box item-box_5">
-							<div class="item-box__image">
-								<div class="item-box__top">
-									<div class="item-box__icon">
-										<img src="@/assets/images/heart.png" alt="">
-									</div>
-									<div class="item-box__name">
-										<div class="item-box__title">Медицина 24/7</div>
-										<div class="item-box__subtitle">2 ч. назад</div>
-									</div>
-								</div>
-								<img src="@/assets/images/05.jpg" alt="">
-							</div>
-							<div class="item-box__text">
-								<div class="item-box__descr">
-									4 растения, которые восстанавливают суставы и хрящи в 1000 раз лучше врачей!
-									<span class="item-box__else">Ещё</span>
-								</div>
-								<div class="item-box__socials">
-									<div class="item-box__social item-box__likes">195</div>
-									<div class="item-box__social item-box__comments">137</div>
-									<div class="item-box__social item-box__refs">143</div>
-								</div>
-								<div class="item-box__bottom">
-									<div class="item-box__date"><span>9</span> ч. назад</div>
-									<div class="item-box__menu"></div>
-								</div>
-								<div class="item-box__btn">Читать далее</div>
-							</div>
-							<div class="item-box__shadow"></div>
-						</a>
-					</div>
-					<div class="box__column big">
-						<a href="#" class="box__item item-box item-box_6">
-							<div class="item-box__image">
-								<div class="item-box__top">
-									<div class="item-box__icon">
-										<img src="@/assets/images/heart.png" alt="">
-									</div>
-									<div class="item-box__name">
-										<div class="item-box__title">Медицина 24/7</div>
-										<div class="item-box__subtitle">2 ч. назад</div>
-									</div>
-								</div>
-								<img src="@/assets/images/06.jpg" alt="">
-							</div>
-							<div class="item-box__text">
-								<div class="item-box__descr">
-									Военный врач: В советской армии от грибка избавлялись за 3 дня! Грибковые ногти топили в растворе...                    
-									<span class="item-box__else">Ещё</span>
-								</div>
-								<div class="item-box__socials">
-									<div class="item-box__social item-box__likes">153</div>
-									<div class="item-box__social item-box__comments">59</div>
-									<div class="item-box__social item-box__refs">57</div>
-								</div>
-								<div class="item-box__bottom">
-									<div class="item-box__date"><span>7</span> ч. назад</div>
-									<div class="item-box__menu"></div>
-								</div>
-								<div class="item-box__btn">Читать далее</div>
-							</div>
-							<div class="item-box__shadow"></div>
-						</a>
-					</div> -->
 					<div class="arrow next"></div>
 				</div>
 			</div>
@@ -252,23 +102,43 @@ export default {
 		return {
 			blocksType: 'large',
 			columnsValue: 3,
-			rowsValue: 1
+			rowsValue: 1,
+			border: {
+				width: '',
+				color: '',
+				type: 'solid'
+			},
+			text: {
+				color: "",
+				size: "",
+				'padding-top': '',
+				'padding-right': '',
+				'padding-bottom': '',
+				'padding-left': ''
+			},
+			image: {
+				'padding-top': '',
+				'padding-right': '',
+				'padding-bottom': '',
+				'padding-left': ''
+			}
 		}
 	},
 	methods: {
-		addClass() {
-			let select = document.querySelector('.select'),
-				box = document.querySelector('.box');
-
-			select.className = `select ${this.blocksType}`;
-			box.className = `box ${this.blocksType}`;
+		typeChange() {
+			if (this.blocksType === 'carousel') {
+				this.rowsValue = 3
+				this.columnsValue = 3
+			} else {
+				this.rowsValue = 1
+			}
 		}
 	},
 	components: {
 		Column
 	},
-	computed: {
-		Columns() {
+	computed: {		
+		columns() {
 			let result = [];
 
 			for (let i = 0; i < this.columnsValue * this.rowsValue; i++) {
@@ -278,18 +148,20 @@ export default {
 			return result
 		},
 		containerSize() {
+			let baseContainerSize = 512
+
 			if (this.columnsValue == 1 && this.blocksType == `smart_1`) {
-				return `320.02px`
+				return `320px`
 			} else if (this.columnsValue == 2 && this.blocksType == `smart_1`) {
-				return `630.02px`
+				return `630px`
 			} else if (this.columnsValue == 3 && this.blocksType == `smart_1`) {
-				return `940.02px`
+				return `940px`
 			} else if (this.columnsValue == 1) {
-				return `512.02px`
+				return `${baseContainerSize}px`
 			} else if (this.columnsValue == 2) {
-				return `1012.02px`
+				return `${baseContainerSize + 500}px`
 			} else if (this.columnsValue == 3) {
-				return `1512.02px`
+				return `${baseContainerSize + 1000}px`
 			}
 		}
 	}
@@ -331,7 +203,6 @@ scroll-behavior: smooth;
 
 body {
 line-height: 1.2;
-font-family: Arial;
 -ms-text-size-adjust: 100%;
 -moz-text-size-adjust: 100%;
 -webkit-text-size-adjust: 100%;
@@ -340,7 +211,7 @@ font-family: Arial;
 input,
 button,
 textarea {
-font-family: Arial;
+font-family: inherit;
 }
 
 input::-ms-clear {
@@ -390,20 +261,30 @@ margin: 0;
 padding: 0;
 }
 
-.template {
+.options {
 	background-color: #fff;
 	padding: 5px;
+
+	.border, .text, .image {
+		display: flex;
+	}
 }
-.select {
+
+select {
 	border: 1px solid #000;
+	margin: 0px 0px 0px 3px;
 }
+
 label {
-	margin: 0px 0px 10px 0px;
+	margin: 0px 50px 10px 0px;
 	display: flex;
 	align-items: center;
 
-	span, input {
-		margin: 0px 10px 0px 0px;
+	input {
+		margin: 0px 0px 0px 3px;
+		border: 1px solid #000;
+		padding: 2px;
+		width: 100px;
 	}
 }
 </style>

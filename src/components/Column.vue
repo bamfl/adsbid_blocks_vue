@@ -1,6 +1,12 @@
 <template>
- 	<div class="box__column" v-bind:style="{flex: `${flexProps}`}">
-		<a href="#" class="box__item item-box item-box_1">
+ 	<div :class="['box__column', {}]" :style="{flex: `${flexProps}`}">
+		<a href="#" class="box__item item-box item-box_1" :style="{
+				border: `${border.width}px ${border.type} ${border.color}`,
+				'padding-top': `${image[`padding-top`]}px`,
+				'padding-right': `${image[`padding-right`]}px`,
+				'padding-bottom': `${image[`padding-bottom`]}px`,
+				'padding-left': `${image[`padding-left`]}px`
+			}">
 			<div class="item-box__image">
 				<div class="item-box__top">
 					<div class="item-box__icon">
@@ -11,10 +17,17 @@
 						<div class="item-box__subtitle">2 ч. назад</div>
 					</div>
 				</div>
-				<img src="@/assets/images/01.jpg" alt="">
+				<img :src="require(`@/assets/images/${this.column.id}.jpg`)" alt="">
 			</div>
 			<div class="item-box__text">
-				<div class="item-box__descr">
+				<div class="item-box__descr" :style="{
+						color: `${text.color}`, 
+						fontSize: `${text.size}px`,
+						'padding-top': `${text[`padding-top`]}px`,
+						'padding-right': `${text[`padding-right`]}px`,
+						'padding-bottom': `${text[`padding-bottom`]}px`,
+						'padding-left': `${text[`padding-left`]}px`
+					}">
 					Большой живот не от еды! Он уйдёт за 5-10 дней, натощак пейте обычный крепкий...
 					<span class="item-box__else">Ещё</span>
 				</div>
@@ -38,13 +51,16 @@
 export default {
 	props: {
 		column: Object,
-		columnsValue: Number
+		columnsValue: Number,
+		border: Object,
+		text: Object,
+		image: Object
 	},
 	computed: {
 		flexProps() {
 			let flexBasis = (100 / this.columnsValue);
 
-			if (this.columnsValue == 1) {
+			if (this.columnsValue === 1) {
 				return `1 1 ${flexBasis}%`;
 			} else {
 				return `0 1 ${flexBasis}%`;

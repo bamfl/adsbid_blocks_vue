@@ -17,7 +17,7 @@ export default {
 .social {
 	.container {
 	  padding: 30px 10px;
-	  max-width: 1512.02px;
+	  // max-width: 1512px;
 	  margin: 0 auto;
 	}
 	
