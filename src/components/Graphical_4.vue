@@ -68,6 +68,11 @@ export default {
 	.item-box__image {
 	  position: relative;
 	  padding: 0px 0px 66.668% 0px;
+
+		@media (max-width:1440px){
+	  	padding: 0px;
+			height: 300px;
+		}
 	}
 	
 	.item-box__image img {
@@ -95,7 +100,7 @@ export default {
 	  text-decoration: none;
 	  font-weight: bold;
 	  line-height: 1.4;
-	  font-size: 19px;
+	  font-size: 2vw;
 	  min-width: 100%;
 	  padding: 0px 60px 0px 0px;
 	  overflow: hidden;
@@ -103,11 +108,18 @@ export default {
 	     text-overflow: ellipsis;
 	  display: -moz-box;
 	  display: -webkit-box;
-	  -webkit-line-clamp: 4;
+	  -webkit-line-clamp: 3;
 	  -webkit-box-orient: vertical;
-	  line-clamp: 4;
+	  line-clamp: 3;
 	  box-orient: vertical;
 	  position: relative;
+
+		@media (max-width:992px){
+			padding: 0px 40px 0px 0px;	
+	    font-size: 20px;
+			-webkit-line-clamp: 4;
+	  	line-clamp: 4;
+		}
 	}
 	
 	.item-box__descr::after {
@@ -121,25 +133,6 @@ export default {
 	  -webkit-transform: translate(0, -50%);
 	      -ms-transform: translate(0, -50%);
 	          transform: translate(0, -50%);
-	}
-	
-	@media (max-width: 1280px) {
-	  .item-box__descr {
-	    font-size: 16px;
-	  }
-	}
-	
-	@media (max-width: 1024px) {
-	  .item-box__descr {
-	    font-size: 14px;
-	    line-height: 1.2;
-	  }
-	}
-	
-	@media (max-width: 768px) {
-	  .item-box__descr {
-	    font-size: 16px;
-	  }
 	}
 	
 	.item-box__shadow {

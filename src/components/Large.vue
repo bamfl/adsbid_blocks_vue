@@ -60,6 +60,11 @@ export default {
 	.item-box__image {
 	  position: relative;
 	  padding: 0px 0px 66.668% 0px;
+
+		@media (max-width:1440px){
+	  	padding: 0px;
+			height: 300px;
+		}
 	}
 	
 	.item-box__image img {
@@ -84,7 +89,7 @@ export default {
 	  text-decoration: none;
 	  font-weight: bold;
 	  line-height: 1.4;
-	  font-size: 30px;
+		font-size: 2vw;
 	  margin: 65px 10px 10px;
 	  overflow: hidden;
 	  -o-text-overflow: ellipsis;
@@ -95,15 +100,14 @@ export default {
 	  -webkit-box-orient: vertical;
 	  line-clamp: 3;
 	  box-orient: vertical;
+
+		@media (max-width:992px){
+			-webkit-line-clamp: 4;
+	  	line-clamp: 4;
+		}
 	}
 	
-	@media (max-width: 425px) {
-	  .item-box__descr {
-	    font-size: 25px;
-	  }
-	}
-	
-	@media (max-width: 425px) {
+	@media (max-width: 992px) {
 	  .item-box__descr {
 	    font-size: 20px;
 	  }

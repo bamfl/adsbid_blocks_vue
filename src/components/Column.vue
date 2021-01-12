@@ -1,5 +1,5 @@
 <template>
- 	<div :class="['box__column', {}]" :style="{flex: `${flexProps}`}">
+ 	<div :class="['box__column']" :style="{flex: `${flexProps}`}">
 		<a href="#" class="box__item item-box item-box_1" :style="{
 				border: `${border.width}px ${border.type} ${border.color}`,
 				'padding-top': `${image[`padding-top`]}px`,

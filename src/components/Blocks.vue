@@ -20,20 +20,26 @@
 			</div>
 			<div class="cols">
 				<label>
-					<span>Количество элементов (по горизонтали):</span>
-					<input type="range" min="1" max="3" v-model="columnsValue">
-					<div v-if="blocksType !== 'carousel'">{{columnsValue}}</div>
-					<div v-else>{{ columnsValue * rowsValue}}</div>
+					<span>Количество тизеров в строке:</span>
+					<input :disabled="blocksType === 'horizontal_1' || blocksType === 'horizontal_4'" type="range" min="1" max="3" v-model="columnsValue">
+					<div v-if="blocksType === 'carousel'">{{ columnsValue * rowsValue}}</div>
+					<div v-else-if="blocksType === 'horizontal_1'">1</div>
+					<div v-else-if="blocksType === 'horizontal_4'">1</div>
+					<div v-else>{{columnsValue}}</div>
 				</label>
 			</div>
 			<div class="rows">
-				<label :style="{display: blocksType === 'carousel' ? 'none' : ''}">
-					<span>Количество строк (по вертикали):</span>
-					<input type="range" min="1" max="3" v-model="rowsValue">{{rowsValue}}
+				<label>
+					<span>Количество строк:</span>
+					<input :disabled="blocksType === 'carousel'" type="range" min="1" max="5" v-model="rowsValue">
+					<div v-if="blocksType === 'carousel'">1</div>
+					<!-- <div v-else-if="blocksType === 'horizontal_1'">{{ columnsValue * rowsValue}}</div>
+					<div v-else-if="blocksType === 'horizontal_4'">{{ columnsValue * rowsValue}}</div> -->
+					<div v-else>{{rowsValue}}</div>
 				</label>
 			</div>
 			<div class="border">
-				<label class="border__width">Толщина рамки<input type="text" v-model="border.width"></label>
+				<label class="border__width">Толщина рамки<input type="number" v-model="border.width"></label>
 				<label class="border__color">Цвет рамки<input type="color" v-model="border.color"></label>
 				<label class="border__type">Тип рамки
 					<select v-model="border.type">
@@ -65,7 +71,7 @@
 		</div>
 
 		<div :class="['box', blocksType]">
-			<div class='container' :style="{'max-width': `${containerSize}`}">
+			<div class='container' :style="{'max-width': `${containerSize}px`}">
 				<div class="box__row">
 					<div class="arrow prev"></div>
 					<Column
@@ -127,10 +133,14 @@ export default {
 	methods: {
 		typeChange() {
 			if (this.blocksType === 'carousel') {
-				this.rowsValue = 3
-				this.columnsValue = 3
+				this.rowsValue = 5
+				this.columnsValue = 1
+			} else if (this.blocksType === 'horizontal_1'  ||this.blocksType === 'horizontal_4') {
+				this.rowsValue = 1
+				this.columnsValue = 1
 			} else {
 				this.rowsValue = 1
+				this.columnsValue = 3
 			}
 		}
 	},
@@ -151,17 +161,17 @@ export default {
 			let baseContainerSize = 512
 
 			if (this.columnsValue == 1 && this.blocksType == `smart_1`) {
-				return `320px`
+				return `320`
 			} else if (this.columnsValue == 2 && this.blocksType == `smart_1`) {
-				return `630px`
+				return `628`
 			} else if (this.columnsValue == 3 && this.blocksType == `smart_1`) {
-				return `940px`
+				return `936.05`
 			} else if (this.columnsValue == 1) {
-				return `${baseContainerSize}px`
+				return `${baseContainerSize}`
 			} else if (this.columnsValue == 2) {
-				return `${baseContainerSize + 500}px`
+				return `${baseContainerSize + 500}`
 			} else if (this.columnsValue == 3) {
-				return `${baseContainerSize + 1000}px`
+				return `${baseContainerSize + 1000}`
 			}
 		}
 	}
@@ -264,9 +274,13 @@ padding: 0;
 .options {
 	background-color: #fff;
 	padding: 5px;
+	width: 100%;
+	top: 0;
+	left: 0;
 
 	.border, .text, .image {
 		display: flex;
+		flex-wrap: wrap;
 	}
 }
 
@@ -278,6 +292,7 @@ select {
 label {
 	margin: 0px 50px 10px 0px;
 	display: flex;
+	flex-wrap: wrap;
 	align-items: center;
 
 	input {

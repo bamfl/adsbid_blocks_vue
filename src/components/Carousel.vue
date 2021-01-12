@@ -20,7 +20,7 @@ export default {
 		padding: 30px 10px;
 		position: relative;
 		overflow: hidden;
-		max-width: 1080px !important;
+		max-width: 1012px !important;
 		margin: 0 auto;
 	}
 

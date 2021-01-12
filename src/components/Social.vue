@@ -17,7 +17,6 @@ export default {
 .social {
 	.container {
 	  padding: 30px 10px;
-	  // max-width: 1512px;
 	  margin: 0 auto;
 	}
 	
@@ -42,14 +41,7 @@ export default {
 	  display: -webkit-box;
 	  display: -ms-flexbox;
 	  display: flex;
-	}
-	
-	@media (max-width: 750px) {
-	  .box__column {
-	    -webkit-box-flex: 1;
-	        -ms-flex: 1 1 100%;
-	            flex: 1 1 100%;
-	  }
+		overflow: hidden;
 	}
 	
 	.item-box {
@@ -61,7 +53,7 @@ export default {
 	      -ms-flex-direction: column;
 	          flex-direction: column;
 	  max-width: 492px;
-	  margin: 0 auto;
+	  margin: 0 auto 10px;
 	}
 	
 	@media (max-width: 750px) {
@@ -73,6 +65,11 @@ export default {
 	.item-box__image {
 	  position: relative;
 	  padding: 0px 0px 66.668% 0px;
+
+		@media (max-width:992px){
+			padding: 0;
+			height: 300px;
+		}
 	}
 	
 	.item-box__image img {
@@ -106,13 +103,26 @@ export default {
 	
 	.item-box__descr {
 	  font-weight: 600;
-	  line-height: 20px;
 	  -webkit-box-flex: 1;
 	      -ms-flex: 1 1 auto;
 	          flex: 1 1 auto;
 	  margin: 0px 0px 15px 0px;
 	  padding: 0px 0px 15px 0px;
 	  border-bottom: 1px solid #dddddd;
+		
+		font-size: 2vw;
+	}
+
+	@media (max-width: 992px) {
+	  .item-box__descr {
+	    font-size: 20px;
+	  }
+	}
+
+	@media (max-width: 320px) {
+	  .item-box__descr {
+	    font-size: 18px;
+	  }
 	}
 	
 	.item-box__shadow {
@@ -183,12 +193,14 @@ export default {
 	  display: -webkit-box;
 	  display: -ms-flexbox;
 	  display: flex;
+		flex-wrap: wrap;
 	}
 	
 	.item-box__social {
 	  padding: 0px 23px;
 	  line-height: 1.4;
 	  position: relative;
+		margin: 0px 0px 5px 0px;
 	}
 	
 	.item-box__social::before {

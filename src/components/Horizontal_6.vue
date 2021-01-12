@@ -14,12 +14,7 @@ export default {
 	margin: 0px;
 	border: 0px;
 }
-.horizontal_6 {
-	.box {
-	  margin: 10px 0px 0px 0px;
-	  overflow: hidden;
-	}
-	
+.horizontal_6 {	
 	.container {
 		margin: 30px 0px 0px 0px !important;
 		max-width: 100% !important;
@@ -62,6 +57,11 @@ export default {
 	.item-box__image {
 	  position: relative;
 	  padding: 0px 0px 60% 0px;
+
+		@media (max-width:992px){
+			padding: 0;
+			height: 300px;
+		}
 	}
 	
 	.item-box__image img {
@@ -77,10 +77,15 @@ export default {
 	.item-box__top {
 	  display: none;
 	}
+
+	.item-box__text {
+		padding: 10px;
+		@media (max-width:375px){
+			padding: 5px 0;
+		}
+	}
 	
 	.item-box__descr {
-	  margin: 5px 0px 0px 0px;
-	  font-size: 20px;
 	  line-height: 1.2;
 	  font-weight: 600;
 	  text-align: left;
@@ -93,11 +98,18 @@ export default {
 	  -webkit-box-orient: vertical;
 	  line-clamp: 5;
 	  box-orient: vertical;
+		font-size: 2vw;
 	}
 	
-	@media (max-width: 768px) {
+	@media (max-width: 992px) {
 	  .item-box__descr {
-	    font-size: 16px;
+	    font-size: 20px;
+	  }
+	}
+
+	@media (max-width: 320px) {
+	  .item-box__descr {
+	    font-size: 18px;
 	  }
 	}
 	

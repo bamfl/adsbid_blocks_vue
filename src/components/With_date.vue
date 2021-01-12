@@ -69,6 +69,11 @@ export default {
 	.item-box__image {
 	  position: relative;
 	  padding: 0px 0px 66.668% 0px;
+
+		@media (max-width:1280px){
+			padding: 0;
+			height: 300px;
+		}
 	}
 	
 	.item-box__image img {
@@ -95,10 +100,14 @@ export default {
 	      -ms-flex-direction: column;
 	          flex-direction: column;
 	  color: #202125;
+
+		@media (max-width:425px){
+			padding: 5px;
+		}
 	}
 	
 	.item-box__descr {
-	  font-size: 18px;
+	  font-size: 2vw;
 	  line-height: 1.2;
 	  font-weight: 400;
 	  -webkit-box-flex: 1;
@@ -114,7 +123,19 @@ export default {
 	  -webkit-box-orient: vertical;
 	  line-clamp: 5;
 	  box-orient: vertical;
-	}
+
+		@media (max-width:1024px){
+			font-size: 3vw;
+		}
+
+		@media (max-width:768px){
+			font-size: 20px;
+		}
+
+		@media (max-width:320px){
+			font-size: 18px;
+		}
+	}	
 	
 	.item-box__shadow {
 	  display: none;
