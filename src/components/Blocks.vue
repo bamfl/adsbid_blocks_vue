@@ -72,7 +72,7 @@
 
 		<div :class="['box', blocksType]">
 			<div class='container' :style="{'max-width': `${containerSize}px`}">
-				<div class="box__row">
+				<div class="box__row" :style="{tr}">
 					<div class="arrow prev"></div>
 					<Column
 						v-for="column of columns" :key="column.id"
@@ -82,7 +82,7 @@
 						:text="text"
 						:image="image"
 					/>
-					<div class="arrow next"></div>
+					<div class="arrow next" @click="nextBtn"></div>
 				</div>
 			</div>
 		</div>
@@ -131,17 +131,24 @@ export default {
 		}
 	},
 	methods: {
-		typeChange() {
+		typeChange () {
 			if (this.blocksType === 'carousel') {
 				this.rowsValue = 5
 				this.columnsValue = 1
-			} else if (this.blocksType === 'horizontal_1'  ||this.blocksType === 'horizontal_4') {
+			} else if (this.blocksType === 'horizontal_1' || this.blocksType === 'horizontal_4') {
 				this.rowsValue = 1
 				this.columnsValue = 1
 			} else {
 				this.rowsValue = 1
 				this.columnsValue = 3
 			}
+		},
+		// prevBtn () {
+			
+		// }
+		nextBtn () {
+			let wid = document.querySelector('.box__row').offsetWidth
+			console.log(wid);
 		}
 	},
 	components: {
@@ -157,7 +164,7 @@ export default {
 
 			return result
 		},
-		containerSize() {
+		containerSize () {
 			let baseContainerSize = 512
 
 			if (this.columnsValue == 1 && this.blocksType == `smart_1`) {

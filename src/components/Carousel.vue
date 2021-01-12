@@ -82,9 +82,19 @@ export default {
 	  display: -webkit-box;
 	  display: -ms-flexbox;
 	  display: flex;
-	  overflow-x: scroll;
+	  // overflow-x: scroll;
 	  margin: 0 -8px;
 	  padding: 0px 10px 0px 0px;
+
+		&.next {
+			transform: translateX(-208px);
+			transition: all 0.5s;
+		}
+
+		&.prev {
+			transform: translateX(208px);
+			transition: all 0.5s;
+		}
 	}
 	
 	@media (min-width: 1024px) {

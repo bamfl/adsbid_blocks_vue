@@ -128,7 +128,7 @@ export default {
 	  text-decoration: none;
 	  font-weight: bold;
 	  line-height: 1.4;
-	  font-size: 2vw;
+	  font-size: 20px;
 	  margin: 65px 10px 10px;
 	  overflow: hidden;
 	  -o-text-overflow: ellipsis;
@@ -141,7 +141,6 @@ export default {
 	  box-orient: vertical;
 
 		@media (max-width:992px){
-			font-size: 20px;
 			-webkit-line-clamp: 4;
 	  	line-clamp: 4;
 		}
