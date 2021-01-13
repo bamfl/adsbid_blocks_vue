@@ -45,7 +45,8 @@ export default {
 	}
 
 		
-	.arrow.prev {  left: -50px;
+	.arrow.prev {  
+		left: -50px;
 	}
 	
 	.arrow.prev::before {
@@ -82,21 +83,15 @@ export default {
 	  display: -webkit-box;
 	  display: -ms-flexbox;
 	  display: flex;
-	  // overflow-x: scroll;
+	  overflow-x: scroll;
 	  margin: 0 -8px;
 	  padding: 0px 10px 0px 0px;
-
-		&.next {
-			transform: translateX(-208px);
-			transition: all 0.5s;
-		}
-
-		&.prev {
-			transform: translateX(208px);
-			transition: all 0.5s;
-		}
 	}
-	
+
+	::-webkit-scrollbar {
+		display: none;
+	}
+
 	@media (min-width: 1024px) {
 	  .box__row:hover .arrow.prev {
 	    left: 40px;

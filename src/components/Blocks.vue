@@ -21,8 +21,8 @@
 			<div class="cols">
 				<label>
 					<span>Количество тизеров в строке:</span>
-					<input :disabled="blocksType === 'horizontal_1' || blocksType === 'horizontal_4'" type="range" min="1" max="3" v-model="columnsValue">
-					<div v-if="blocksType === 'carousel'">{{ columnsValue * rowsValue}}</div>
+					<input :disabled="blocksType === 'horizontal_1' || blocksType === 'horizontal_4'" type="range" min="1" max="3" v-model="columnsValue" @change="transformStart">
+					<div v-if="blocksType === 'carousel'">{{ columns.length }}</div>
 					<div v-else-if="blocksType === 'horizontal_1'">1</div>
 					<div v-else-if="blocksType === 'horizontal_4'">1</div>
 					<div v-else>{{columnsValue}}</div>
@@ -33,8 +33,6 @@
 					<span>Количество строк:</span>
 					<input :disabled="blocksType === 'carousel'" type="range" min="1" max="5" v-model="rowsValue">
 					<div v-if="blocksType === 'carousel'">1</div>
-					<!-- <div v-else-if="blocksType === 'horizontal_1'">{{ columnsValue * rowsValue}}</div>
-					<div v-else-if="blocksType === 'horizontal_4'">{{ columnsValue * rowsValue}}</div> -->
 					<div v-else>{{rowsValue}}</div>
 				</label>
 			</div>
@@ -72,8 +70,8 @@
 
 		<div :class="['box', blocksType]">
 			<div class='container' :style="{'max-width': `${containerSize}px`}">
-				<div class="box__row" :style="{tr}">
-					<div class="arrow prev"></div>
+				<div class="box__row">
+					<div class="arrow prev" @click="prevBtn"></div>
 					<Column
 						v-for="column of columns" :key="column.id"
 						:column="column"
@@ -81,6 +79,7 @@
 						:border="border"
 						:text="text"
 						:image="image"
+						:style="blocksType === 'carousel' ? {transition: `transform 0.5s`, transform: `translateX(-${transformSize}px)`} : ''"
 					/>
 					<div class="arrow next" @click="nextBtn"></div>
 				</div>
@@ -127,14 +126,16 @@ export default {
 				'padding-right': '',
 				'padding-bottom': '',
 				'padding-left': ''
-			}
+			},
+			arrowsCounter: 0,
+			transformSize: 0,
 		}
 	},
 	methods: {
 		typeChange () {
 			if (this.blocksType === 'carousel') {
 				this.rowsValue = 5
-				this.columnsValue = 1
+				this.columnsValue = 2
 			} else if (this.blocksType === 'horizontal_1' || this.blocksType === 'horizontal_4') {
 				this.rowsValue = 1
 				this.columnsValue = 1
@@ -143,12 +144,21 @@ export default {
 				this.columnsValue = 3
 			}
 		},
-		// prevBtn () {
-			
-		// }
+		transformStart() {
+			this.transformSize = 0
+			this.arrowsCounter = 0
+		},
+		prevBtn () {
+			if (this.arrowsCounter > 0) {
+				this.arrowsCounter--
+				this.transformSize -= 208
+			}
+		},
 		nextBtn () {
-			let wid = document.querySelector('.box__row').offsetWidth
-			console.log(wid);
+			if (this.arrowsCounter < this.columns.length - 5) {
+				this.arrowsCounter++
+				this.transformSize += 208
+			}
 		}
 	},
 	components: {

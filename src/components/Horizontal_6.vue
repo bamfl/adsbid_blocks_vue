@@ -52,6 +52,7 @@ export default {
 	
 	.item-box {
 	  min-width: 100%;
+		display: block;
 	}
 	
 	.item-box__image {
